@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "ece391support.h": "c",
+        "functional": "c",
+        "__locale": "c",
+        "file_driver.h": "c",
+        "cstdint": "c",
+        "ece391syscall.h": "c",
+        "networking.h": "c",
+        "types.h": "c"
+    }
+}

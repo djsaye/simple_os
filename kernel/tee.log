@@ -1,0 +1,17 @@
+make: Warning: File `Makefile.dep' has modification time 1.4 s in the future
+networking.c: In function ‘init_ethernet_config_from_pci’:
+networking.c:47: warning: implicit declaration of function ‘detect_eeprom’
+networking.c:45: warning: unused variable ‘status_command’
+networking.c:37: warning: unused variable ‘pde_index’
+networking.c: In function ‘ethernet_handler’:
+networking.c:146: warning: implicit declaration of function ‘handle_receive’
+networking.c:129: warning: unused variable ‘txaddr’
+networking.c: In function ‘send_packet’:
+networking.c:286: warning: unused variable ‘tail’
+networking.c: At top level:
+networking.c:309: warning: conflicting types for ‘handle_receive’
+networking.c:146: warning: previous implicit declaration of ‘handle_receive’ was here
+networking.c: In function ‘handle_receive’:
+networking.c:316: warning: unused variable ‘len’
+networking.c:315: warning: unused variable ‘buf’
+make: warning:  Clock skew detected.  Your build may be incomplete.

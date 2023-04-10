@@ -1,0 +1,48 @@
+#if !defined(LINKAGE_H)
+#define LINKAGE_H
+
+void int_handler_linkage(); //default interrupt handler
+
+/*EXCEPTIONS:*/
+void DIVISION_BY_0_LINKAGE(); //0
+//1
+void NMI_LINKAGE(); //2
+void BREAKPOINT_LINKAGE(); //3
+void OVERFLOW_LINKAGE(); //4
+void BOUND_RANGE_EXCEEDED_LINKAGE(); //5
+void INVALID_OPCODE_LINKAGE(); //6
+void DEVICE_NOT_AVAILABLE_LINKAGE(); //7
+void DOUBLE_FAULT_LINKAGE(); //8
+//9
+void INVALID_TSS_LINKAGE(); //10
+void SEGMENT_NOT_PRESENT_LINKAGE(); //11
+void STACK_SEGMENT_FAULT_LINKAGE(); //12
+void GENERAL_PROTECTION_LINKAGE(); //13
+void PAGE_FAULT_LINKAGE(); //14
+//15
+void MATH_FAULT_LINKAGE(); //16
+void ALIGNMENT_CHECK_LINKAGE(); //17
+void MACHINE_CHECK_LINKAGE(); //18
+void SIMD_EXCEPTION_LINKAGE(); //19
+
+void IRQ_LINKAGE_0();
+void IRQ_LINKAGE_1();
+void IRQ_LINKAGE_2();
+void IRQ_LINKAGE_3();
+void IRQ_LINKAGE_4();
+void IRQ_LINKAGE_5();
+void IRQ_LINKAGE_6();
+void IRQ_LINKAGE_7();
+void IRQ_LINKAGE_8();
+void IRQ_LINKAGE_9();
+void IRQ_LINKAGE_10();
+void IRQ_LINKAGE_11();
+void IRQ_LINKAGE_12();
+void IRQ_LINKAGE_13();
+void IRQ_LINKAGE_14();
+void IRQ_LINKAGE_15();
+
+void SYSCALL_LINKAGE();
+
+void test();
+#endif /*LINKAGE_H*/

@@ -1,0 +1,54 @@
+﻿MP3 Checkpoint 1 Bug Log
+Group 58: Revan Ji, Arjun Pal, Ian Song, Satvik Yellanki
+________________
+BUG 1:
+Bug Description: STI immediately causes exception 0x8.
+Fix: RTC is pumping to 0x8 without properly mapping PIC. Masking PIC completely, and later, mapping it properly, resolves the bug.
+Time Taken: 3 hours.
+________________
+
+
+BUG 2: 
+Bug Description: printf causes page fault
+Fix: We are printing `\nString\n` immediately after clear(). clear() puts screen_x screen_y near the end of the screen memory. Printing `\n` increments screen_y and puts the next write outside of the display memory, i.e. into unmapped physical memory. Modifying putc() to update screen_x, screen_y properly fixes this bug.
+Time Taken: 5 hours.
+
+________________
+BUG 3:
+Bug Description: putc would sometimes not print first character after clearing the screen
+Fix: In lib.h, there was a line “y++” that needed to be changed so that the position of the next character to be written would be at the start of the screen and not the end. Since clear() did not reset the current x or y position, it would cause the text to be written where
+Time Taken: Maybe an hour, there was a post on piazza about this bug.
+
+________________
+BUG 4:
+Bug Description: There was a compiler error where some assembly files we created would not compile, with the compiler alerting us that there were unrecognized functions and data types which were already defined.
+Fix: It turned out that we included .h files in our .S files, causing the compiler to crash when we were trying to create an assembly file that included C functions and variables. We included the header files because it defined the functions in our .S file, but this was not needed.
+Time Taken: 2 hours.
+________________
+
+
+BUG 5:
+Bug Description: Initializing paging instantly caused a boot loop, for a reason unknown at the time. The reason was that the kernel page had not been initialized properly, and therefore after paging was intialized, the program essentially got kicked out by itself, causing the boot loop.
+Fix: The fix was simply to properly set values for the kernel page, which was easy enough to fix. Diagnosing this issue took quite a while, however.
+Time Taken: 4 hours
+________________
+
+
+BUG 6:
+Bug Description: Another paging bug that was present was that video memory was not being set, even though it was directly created in the init_paging method. The issue was that the page table had not been set properly yet, and video memory is a 4kb page as opposed to 4 mb, so it needed to be contained in the page table
+Fix: Added code to initialize the page table entry in the page directory, and the bug went away.
+Time Taken: 1 hour.
+________________
+
+
+BUG 7:
+Bug Description: Only one interrupt would process on the RTC device and then no other interrupts would be sent. This happened because interrupts greater than IRQ 7 will processed on both primary and secondary PICs, and the EOI signal was only being sent to the secondary PIC. This prevented other interrupts from occurring since that first RTC interrupt was always in progress.
+Fix: Sent EOI to Primary PIC irq2 when interrupts with irq greater than 7. 
+Time Taken: 3 hrs
+________________
+
+
+BUG 8:
+Bug Description: RTC interrupts would never process. This happened because interrupts greater than IRQ 7 will be processed on both primary and secondary PICs, and IRQ2 on the primary PIC (which connects to the secondary PIC) was not set. As a result, RTC interrupts never happened.
+Fix: Enabled IRQ2 in the PIC initialization sequence.
+Time Taken: 2hrs

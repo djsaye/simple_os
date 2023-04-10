@@ -1,0 +1,37 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+linkage.o: linkage.S exception_numbers.h
+outl.o: outl.S
+paging_asm.o: paging_asm.S
+syscall_asm.o: syscall_asm.S
+tests_asm.o: tests_asm.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+file_driver.o: file_driver.c types.h file_driver.h filesystem.h paging.h \
+  lib.h terminal.h
+filesystem.o: filesystem.c filesystem.h types.h lib.h terminal.h
+i8259.o: i8259.c i8259.h types.h lib.h terminal.h
+interrupt_error.o: interrupt_error.c interrupt_error.h types.h lib.h \
+  terminal.h exception_numbers.h linkage.h syscall.h filesystem.h \
+  file_driver.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h terminal.h \
+  i8259.h debug.h tests.h interrupt_error.h paging.h rtc.h \
+  exception_numbers.h keyboard.h filesystem.h pit.h networking.h
+keyboard.o: keyboard.c keyboard.h types.h interrupt_error.h i8259.h lib.h \
+  terminal.h
+lib.o: lib.c lib.h types.h terminal.h
+networking.o: networking.c networking.h types.h pci.h lib.h terminal.h \
+  outl.h i8259.h paging.h
+paging.o: paging.c paging.h types.h lib.h terminal.h
+pci.o: pci.c pci.h types.h lib.h terminal.h outl.h
+pit.o: pit.c pit.h types.h lib.h terminal.h i8259.h exception_numbers.h \
+  process.h syscall.h filesystem.h file_driver.h
+process.o: process.c process.h types.h syscall.h filesystem.h \
+  file_driver.h x86_desc.h rtc.h terminal.h pit.h lib.h i8259.h \
+  exception_numbers.h paging.h
+rtc.o: rtc.c rtc.h interrupt_error.h types.h i8259.h lib.h terminal.h
+syscall.o: syscall.c syscall.h types.h filesystem.h file_driver.h rtc.h \
+  terminal.h paging.h lib.h x86_desc.h process.h
+terminal.o: terminal.c terminal.h interrupt_error.h types.h keyboard.h \
+  process.h syscall.h filesystem.h file_driver.h lib.h
+tests.o: tests.c tests.h x86_desc.h types.h lib.h terminal.h rtc.h \
+  interrupt_error.h file_driver.h filesystem.h keyboard.h syscall.h \
+  process.h networking.h
